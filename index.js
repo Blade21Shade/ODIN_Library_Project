@@ -64,12 +64,35 @@ function addBookToLibraryElement(book) {
     const readBtn = document.createElement("button");
     readBtn.classList.add("read-button");
     readBtn.innerText = "Change Read Status";
-    
+
     btnGrid.append(delBtn, readBtn);
     bookEle.appendChild(btnGrid);
 
     libraryEle.appendChild(bookEle);
 }
+
+libraryEle.addEventListener("click", (e) => {
+    if (e.target.tagName.toLowerCase() === "button") {
+        const bookEle = e.target.parentNode.parentNode;
+        const id = bookEle.id;
+        
+        let book;
+        for (let b of library) {
+            if (b.id === id) {
+                book = b;
+                break;
+            }
+        }
+        
+        if(e.target.classList.contains("delete-button")) {
+
+        } else { // read-button
+            book.updateReadStatus();
+            const hasBeenRead = bookEle.querySelector(":nth-child(4)");
+            hasBeenRead.innerText = "hasBeenRead: " + book.hasBeenRead;
+        }
+    };
+});
 
 // function removeBookFromLibraryElement(id) {
 //     let idString = "#" + [id];

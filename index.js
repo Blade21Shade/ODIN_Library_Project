@@ -51,10 +51,22 @@ function addBookToLibraryElement(book) {
         ele.innerText += [k] + ": " + book[[k]];
         bookEle.appendChild(ele);
     }
-
     bookEle.id = book.id;
     
-    // Buttons for deleting and changing read status
+    // Buttons for deleting the book and changing the read status
+    const btnGrid = document.createElement("div");
+    btnGrid.classList.add("button-grid");
+
+    const delBtn = document.createElement("button");
+    delBtn.classList.add("delete-button");
+    delBtn.innerText = "Delete Book";
+
+    const readBtn = document.createElement("button");
+    readBtn.classList.add("read-button");
+    readBtn.innerText = "Change Read Status";
+    
+    btnGrid.append(delBtn, readBtn);
+    bookEle.appendChild(btnGrid);
 
     libraryEle.appendChild(bookEle);
 }

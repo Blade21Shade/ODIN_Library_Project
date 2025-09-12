@@ -12,14 +12,13 @@ function Book(title, author, pageNum, hasBeenRead, id) {
     this.id = id;
 };
 
-// Book.prototype.updateReadStatus = function() {
-//     if (hasBeenRead) {
-//         this.hasBeenRead = "Has been read";
-//     } else {
-//         this.hasBeenRead = "Hasn't been read";
-//     }
-//     hasBeenRead = !hasBeenRead;
-// };
+Book.prototype.updateReadStatus = function() {
+    if (this.hasBeenRead.at(3)=== " ") { // Has been read
+        this.hasBeenRead = "Hasn't been read";
+    } else { // Hasn't been read
+        this.hasBeenRead = "Has been read";
+    }
+};
 
 function addBookToLibrary(title, author, pageNum, hasBeenRead) {
     let id = crypto.randomUUID();
@@ -31,8 +30,6 @@ function addBookToLibrary(title, author, pageNum, hasBeenRead) {
 const book1 = new Book("Book 1", "Mary Sue", 100, true,  crypto.randomUUID());
 const book2 = new Book("Book 2", "John Doe", 111, false, crypto.randomUUID());
 const book3 = new Book("Book 3", "Anth ony",   1, true,  crypto.randomUUID());
-
-// book1.updateReadStatus();
 
 library.push(book1);
 library.push(book2);

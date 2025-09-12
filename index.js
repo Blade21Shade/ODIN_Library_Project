@@ -18,7 +18,7 @@ function addBookToLibrary(title, author, pageNum, hasBeenRead) {
     library.push(newBook); 
 }
 
-// Initial books for display purposes
+// Initial books for display/testing purposes
 const book1 = new Book("Book 1", "Mary Sue", 100, true,  crypto.randomUUID());
 const book2 = new Book("Book 2", "John Doe", 111, false, crypto.randomUUID());
 const book3 = new Book("Book 3", "Anth ony",   1, true,  crypto.randomUUID());
@@ -38,10 +38,15 @@ function addBookToLibraryElement(book) {
     bookEle.classList.add("book");
     for (let prop in book) { // Object uses for/in
         const ele = document.createElement("p");
-        ele.innerText += prop + ": ";
-        ele.innerText += book[prop];
+        ele.innerText += prop + ": " + book[prop];
         bookEle.appendChild(ele);
     }
     bookEle.id = book.id;
     libraryEle.appendChild(bookEle);
 }
+
+// function removeBookFromLibraryElement(id) {
+//     let idString = "#" + [id];
+//     const bookEle = libraryEle.querySelector(idString);
+//     libraryEle.removeChild(bookEle);
+// }

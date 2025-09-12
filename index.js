@@ -12,6 +12,15 @@ function Book(title, author, pageNum, hasBeenRead, id) {
     this.id = id;
 };
 
+// Book.prototype.updateReadStatus = function() {
+//     if (hasBeenRead) {
+//         this.hasBeenRead = "Has been read";
+//     } else {
+//         this.hasBeenRead = "Hasn't been read";
+//     }
+//     hasBeenRead = !hasBeenRead;
+// };
+
 function addBookToLibrary(title, author, pageNum, hasBeenRead) {
     let id = crypto.randomUUID();
     const newBook = new Book(title, author, pageNum, hasBeenRead, id);
@@ -22,6 +31,8 @@ function addBookToLibrary(title, author, pageNum, hasBeenRead) {
 const book1 = new Book("Book 1", "Mary Sue", 100, true,  crypto.randomUUID());
 const book2 = new Book("Book 2", "John Doe", 111, false, crypto.randomUUID());
 const book3 = new Book("Book 3", "Anth ony",   1, true,  crypto.randomUUID());
+
+// book1.updateReadStatus();
 
 library.push(book1);
 library.push(book2);
@@ -34,14 +45,20 @@ for (let book of library) { // Array uses for/of
 }
 
 function addBookToLibraryElement(book) {
+    // Book itself
     const bookEle = document.createElement("div");
     bookEle.classList.add("book");
-    for (let prop in book) { // Object uses for/in
+    const entries = Object.keys(book); // keys is used so prototype functions aren't included when adding elements to bookEle
+    for (let k of entries) { // Array uses for/of
         const ele = document.createElement("p");
-        ele.innerText += prop + ": " + book[prop];
+        ele.innerText += [k] + ": " + book[[k]];
         bookEle.appendChild(ele);
     }
+
     bookEle.id = book.id;
+    
+    // Buttons for deleting and changing read status
+
     libraryEle.appendChild(bookEle);
 }
 

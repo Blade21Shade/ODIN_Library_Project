@@ -1,0 +1,12 @@
+.library {
+    background-color: lightblue;
+    
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 400px));
+    grid-auto-rows: 200px;
+}
+
+.book {
+    background-color: white;
+    box-shadow: 1px 1px 5px rgb(132, 132, 132);
+}

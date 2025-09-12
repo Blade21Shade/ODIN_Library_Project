@@ -1,3 +1,4 @@
+// Book storage and functionality
 const library = [];
 
 function Book(title, author, pageNum, hasBeenRead, id) {
@@ -16,3 +17,14 @@ function addBookToLibrary(title, author, pageNum, hasBeenRead) {
     const newBook = new Book(title, author, pageNum, hasBeenRead, id);
     library.push(newBook); 
 }
+
+// Initial books for display purposes
+const book1 = new Book("Book 1", "Mary Sue", 100, true,  crypto.randomUUID());
+const book2 = new Book("Book 2", "John Doe", 111, false, crypto.randomUUID());
+const book3 = new Book("Book 3", "Anth ony",   1, true,  crypto.randomUUID());
+
+library.push(book1);
+library.push(book2);
+library.push(book3);
+
+// DOM manipulation

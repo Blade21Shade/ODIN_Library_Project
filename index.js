@@ -88,7 +88,16 @@ libraryEle.addEventListener("click", (e) => {
 
         } else { // read-button
             book.updateReadStatus();
-            const hasBeenRead = bookEle.querySelector(":nth-child(4)");
+            const children = bookEle.children;
+            let hasBeenRead;
+            for (let p of children) {
+                let t = p.innerText;
+                if (t.match(/^has/)) { // Searching for "hasBeenRead" via has
+                    hasBeenRead = p;
+                    break;
+                }
+            }
+            
             hasBeenRead.innerText = "hasBeenRead: " + book.hasBeenRead;
         }
     };

@@ -30,6 +30,10 @@ library.push(book3);
 // DOM manipulation
 const libraryEle = document.querySelector(".library");
 for (let book of library) { // Array uses for/of
+    addBookToLibraryElement(book);
+}
+
+function addBookToLibraryElement(book) {
     const bookEle = document.createElement("div");
     bookEle.classList.add("book");
     for (let prop in book) { // Object uses for/in

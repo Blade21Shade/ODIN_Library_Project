@@ -28,3 +28,16 @@ library.push(book2);
 library.push(book3);
 
 // DOM manipulation
+const libraryEle = document.querySelector(".library");
+for (let book of library) { // Array uses for/of
+    const bookEle = document.createElement("div");
+    bookEle.classList.add("book");
+    for (let prop in book) { // Object uses for/in
+        const ele = document.createElement("p");
+        ele.innerText += prop + ": ";
+        ele.innerText += book[prop];
+        bookEle.appendChild(ele);
+    }
+    bookEle.id = book.id;
+    libraryEle.appendChild(bookEle);
+}

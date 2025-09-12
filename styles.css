@@ -1,9 +1,11 @@
 .library {
     background-color: lightblue;
-    
+    padding: 15px;
+
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 400px));
     grid-auto-rows: 200px;
+    gap: 15px;
 }
 
 .book {

@@ -106,6 +106,12 @@ libraryEle.addEventListener("click", (e) => {
     };
 });
 
+const newBookButton = document.querySelector("#show-new-book-dialog");
+const newBookDialog = document.querySelector("#new-book-dialog");
+newBookButton.addEventListener("click", () => {
+    newBookDialog.showModal();
+});
+
 // function removeBookFromLibraryElement(id) {
 //     let idString = "#" + [id];
 //     const bookEle = libraryEle.querySelector(idString);

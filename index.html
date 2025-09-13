@@ -8,6 +8,33 @@
     <script src="index.js" defer></script>
 </head>
 <body>
+    <div class="header-container">
+        <h1>Library</h1>
+        <button id="show-new-book-dialog">Add new book</button>
+        <dialog id="new-book-dialog">
+            <form id="new-book-form" method="dialog">
+                <div>
+                    <label for="author">Author</label>
+                    <input id="author" required>
+                </div>
+                <div>
+                    <label for="title">Title</label>
+                    <input id="title" required>
+                </div>
+                <div>
+                    <label for="page-number">Number of pages</label>
+                    <input id="paeg-number" required>
+                </div>
+                <div>
+                    <label for="has-been-read">Has Been Read</label>
+                    <input type="checkbox" id="has-been-read">
+                </div>
+
+                <button>Add book</button>
+                <button>Cancel</button>
+            </form>
+        </dialog>
+    </div>
     <div class="library">
     </div>
 </body>

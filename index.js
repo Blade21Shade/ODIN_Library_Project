@@ -75,17 +75,20 @@ libraryEle.addEventListener("click", (e) => {
     if (e.target.tagName.toLowerCase() === "button") {
         const bookEle = e.target.parentNode.parentNode;
         const id = bookEle.id;
+        let index;
         
         let book;
-        for (let b of library) {
-            if (b.id === id) {
-                book = b;
+        for (let i = 0; i < library.length; i++) {
+            if (library[i].id === id) {
+                book = library[i];
+                index = i;
                 break;
             }
         }
         
-        if(e.target.classList.contains("delete-button")) {
-
+        if (e.target.classList.contains("delete-button")) {
+            library.splice(index, 1);
+            libraryEle.removeChild(bookEle);
         } else { // read-button
             book.updateReadStatus();
             const children = bookEle.children;

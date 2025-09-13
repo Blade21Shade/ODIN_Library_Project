@@ -23,7 +23,8 @@ Book.prototype.updateReadStatus = function() {
 function addBookToLibrary(title, author, pageNum, hasBeenRead) {
     let id = crypto.randomUUID();
     const newBook = new Book(title, author, pageNum, hasBeenRead, id);
-    library.push(newBook); 
+    library.push(newBook);
+    return newBook;
 }
 
 // Initial books for display/testing purposes
@@ -111,6 +112,44 @@ const newBookDialog = document.querySelector("#new-book-dialog");
 newBookButton.addEventListener("click", () => {
     newBookDialog.showModal();
 });
+
+const addBookButton = document.querySelector("#add-book-button");
+const cancelAddBookButton = document.querySelector("#cancel-add-book-button");
+
+const newBookAuthor = document.querySelector("input[id='author']");
+const newBookTitle = document.querySelector("input[id='title']");
+const newBookPageNum = document.querySelector("input[id='number-of-pages']");
+const newBookHasBeenRead = document.querySelector("input[id='has-been-read']");
+
+addBookButton.addEventListener("click", (e) => {
+    let author = newBookAuthor.value;
+    let title = newBookTitle.value;
+    let pageNum = newBookPageNum.value;
+    let hasBeenRead = newBookHasBeenRead.checked;
+
+    if (author != "" && title != "" && pageNum > 0) { // If all required fields are filled
+        e.preventDefault();
+        const newBook = addBookToLibrary(title, author, pageNum, hasBeenRead);
+        addBookToLibraryElement(newBook);
+        // Clear info for next book
+        clearDialogForm();
+        newBookDialog.close();
+    }
+});
+
+cancelAddBookButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    // Clear info for next book
+    clearDialogForm();
+    newBookDialog.close();
+});
+
+clearDialogForm = function() {
+    newBookAuthor.value = "";
+    newBookTitle.value = "";
+    newBookPageNum.value = 0;
+    newBookHasBeenRead.checked = false;
+}
 
 // function removeBookFromLibraryElement(id) {
 //     let idString = "#" + [id];

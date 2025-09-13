@@ -12,7 +12,7 @@
         <h1>Library</h1>
         <button id="show-new-book-dialog">Add new book</button>
         <dialog id="new-book-dialog">
-            <form id="new-book-form" method="dialog">
+            <form id="new-book-form">
                 <div>
                     <label for="author">Author</label>
                     <input id="author" required>
@@ -22,16 +22,16 @@
                     <input id="title" required>
                 </div>
                 <div>
-                    <label for="page-number">Number of pages</label>
-                    <input id="paeg-number" required>
+                    <label for="number-of-pages">Number of pages</label>
+                    <input type="number" id="number-of-pages" value = "0" required>
                 </div>
                 <div>
                     <label for="has-been-read">Has Been Read</label>
                     <input type="checkbox" id="has-been-read">
                 </div>
 
-                <button>Add book</button>
-                <button>Cancel</button>
+                <button id="add-book-button">Add book</button>
+                <button id="cancel-add-book-button" formmethod="dialog">Cancel</button>
             </form>
         </dialog>
     </div>

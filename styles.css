@@ -2,6 +2,7 @@
 .library {
     background-color: lightblue;
     padding: 15px;
+    min-height: 200px;
 
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 400px));

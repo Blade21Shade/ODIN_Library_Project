@@ -1,3 +1,4 @@
+/*Content styling*/
 .library {
     background-color: lightblue;
     padding: 15px;
@@ -32,4 +33,18 @@
 .delete-button:hover {
     background-color: rgb(119, 0, 0);
     color: white;
+}
+
+/*Add book styling*/
+#new-book-form {
+    display: grid;
+    grid-template-columns: 15vw 20vw;
+    grid-auto-rows: 5vh;
+}
+
+#new-book-form div {
+    grid-column: 1 / -1;
+
+    display: grid;
+    grid-template-columns: subgrid;
 }

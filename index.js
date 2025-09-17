@@ -1,5 +1,4 @@
 // Book storage and functionality
-// const library = [];
 
 class Book {
     title;
@@ -51,6 +50,13 @@ class Library {
         Library.#library.push(book);
     }
 
+    static removeBookFromLibrary(index) {
+        if (index >= Library.#library.length) {
+            return;
+        }
+        Library.#library.splice(index, 1);
+    }
+
     static createAndAddBookToLibrary(title, author, pageNum, hasBeenRead) {
         let id = crypto.randomUUID();
         const newBook = new Book(title, author, pageNum, hasBeenRead, id);
@@ -58,8 +64,8 @@ class Library {
         return newBook;
     }
 
-    static getLibrary() {
-        return Library.#library;
+    static getCopyOfLibrary() {
+        return [...Library.#library];
     }
 }
 
@@ -70,7 +76,7 @@ const book3 = Library.createAndAddBookToLibrary("Book 3", "Tony ony",   1, true)
 
 // DOM manipulation
 const libraryEle = document.querySelector(".library");
-for (let book of Library.getLibrary()) { // Array uses for/of (This is part of initial, I need the library element however)
+for (let book of Library.getCopyOfLibrary()) { // Array uses for/of (This is part of initial, I need the library element however)
     addBookToLibraryElement(book);
 }
 
@@ -111,7 +117,7 @@ libraryEle.addEventListener("click", (e) => {
         let index;
         
         let book;
-        let lib = Library.getLibrary();
+        let lib = Library.getCopyOfLibrary();
         for (let i = 0; i < lib.length; i++) {
             if (lib[i].id === id) {
                 book = lib[i];
@@ -121,7 +127,7 @@ libraryEle.addEventListener("click", (e) => {
         }
         
         if (e.target.classList.contains("delete-button")) {
-            lib.splice(index, 1);
+            Library.removeBookFromLibrary(index);
             libraryEle.removeChild(bookEle);
         } else { // read-button
             book.updateReadStatus();

@@ -28,13 +28,9 @@ function addBookToLibrary(title, author, pageNum, hasBeenRead) {
 }
 
 // Initial books for display/testing purposes
-const book1 = new Book("Book 1", "Mary Sue", 100, true,  crypto.randomUUID());
-const book2 = new Book("Book 2", "John Doe", 111, false, crypto.randomUUID());
-const book3 = new Book("Book 3", "Anth ony",   1, true,  crypto.randomUUID());
-
-library.push(book1);
-library.push(book2);
-library.push(book3);
+const book1 = addBookToLibrary("Book 1", "Mary Sue", 100, true);
+const book2 = addBookToLibrary("Book 2", "John Doe", 111, false);
+const book3 = addBookToLibrary("Book 3", "Anth ony",   1, true);
 
 // DOM manipulation
 const libraryEle = document.querySelector(".library");

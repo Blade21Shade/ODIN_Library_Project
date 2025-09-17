@@ -1,44 +1,53 @@
 // Book storage and functionality
 
 class Book {
-    title;
-    author;
-    pageNum;
-    hasBeenRead;
-    id;
+    #title;
+    #author;
+    #pageNum;
+    #hasBeenRead;
+    #id;
     constructor(title, author, pageNum, hasBeenRead) {
-        this.title = title;
-        this.author = author;
-        this.pageNum = pageNum;
-        this.hasBeenRead = hasBeenRead ? "Has been read" : "Hasn't been read";
-        this.id = crypto.randomUUID();
+        this.#title = title;
+        this.#author = author;
+        this.#pageNum = pageNum;
+        this.#hasBeenRead = hasBeenRead ? "Has been read" : "Hasn't been read";
+        this.#id = crypto.randomUUID();
     }
 
     get title() {
-        return this.title;
+        return this.#title;
     }
 
     get author() {
-        return this.author;
+        return this.#author;
     }
 
     get pageNum() {
-        return this.pageNum;
+        return this.#pageNum;
     }
 
     get hasBeenRead() {
-        return this.hasBeenRead;
+        return this.#hasBeenRead;
     }
 
     get id() {
-        return this.id;
+        return this.#id;
+    }
+
+    getFields() {
+        return {
+            title: this.title,
+            author: this.author,
+            pageNum: this.pageNum,
+            hasBeenRead: this.hasBeenRead,
+            id: this.id};
     }
 
     updateReadStatus() {
-        if (this.hasBeenRead.at(3)=== " ") { // Has been read
-        this.hasBeenRead = "Hasn't been read";
+        if (this.#hasBeenRead.at(3)=== " ") { // Has been read
+        this.#hasBeenRead = "Hasn't been read";
         } else { // Hasn't been read
-            this.hasBeenRead = "Has been read";
+            this.#hasBeenRead = "Has been read";
         }
     }
 }
@@ -84,10 +93,10 @@ function addBookToLibraryElement(book) {
     // Book itself
     const bookEle = document.createElement("div");
     bookEle.classList.add("book");
-    const entries = Object.keys(book); // keys is used so prototype functions aren't included when adding elements to bookEle
-    for (let k of entries) { // Array uses for/of
+    const entries = book.getFields();
+    for (let k in entries) {
         const ele = document.createElement("p");
-        ele.innerText += [k] + ": " + book[[k]];
+        ele.innerText += [k] + ": " + entries[k];
         bookEle.appendChild(ele);
     }
     bookEle.id = book.id;

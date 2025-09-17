@@ -1,40 +1,76 @@
 // Book storage and functionality
-const library = [];
+// const library = [];
 
-function Book(title, author, pageNum, hasBeenRead, id) {
-    if (!new.target) {
-        throw Error("Book can only be called as a constructor");
+class Book {
+    #title;
+    #author;
+    #pageNum;
+    #hasBeenRead;
+    #id;
+    constructor(title, author, pageNum, hasBeenRead) {
+        this.#title = title;
+        this.#author = author;
+        this.#pageNum = pageNum;
+        this.#hasBeenRead = hasBeenRead ? "Has been read" : "Hasn't been read";
+        this.#id = crypto.randomUUID();
     }
-    this.title = title;
-    this.author = author;
-    this.pageNum = pageNum;
-    this.hasBeenRead = hasBeenRead ? "Has been read" : "Hasn't been read";
-    this.id = id;
-};
 
-Book.prototype.updateReadStatus = function() {
-    if (this.hasBeenRead.at(3)=== " ") { // Has been read
+    get title() {
+        return this.#title;
+    }
+
+    get author() {
+        return this.#author;
+    }
+
+    get pageNum() {
+        return this.#pageNum;
+    }
+
+    get hasBeenRead() {
+        return this.#hasBeenRead;
+    }
+
+    get id() {
+        return this.#id;
+    }
+
+    updateReadStatus() {
+        if (this.hasBeenRead.at(3)=== " ") { // Has been read
         this.hasBeenRead = "Hasn't been read";
-    } else { // Hasn't been read
-        this.hasBeenRead = "Has been read";
+        } else { // Hasn't been read
+            this.hasBeenRead = "Has been read";
+        }
     }
-};
+}
 
-function addBookToLibrary(title, author, pageNum, hasBeenRead) {
-    let id = crypto.randomUUID();
-    const newBook = new Book(title, author, pageNum, hasBeenRead, id);
-    library.push(newBook);
-    return newBook;
+class Library {
+    static #library = [];
+    
+    static addBookToLibrary(book) {
+        Library.#library.push(book);
+    }
+
+    static createAndAddBookToLibrary(title, author, pageNum, hasBeenRead) {
+        let id = crypto.randomUUID();
+        const newBook = new Book(title, author, pageNum, hasBeenRead, id);
+        Library.#library.push(newBook);
+        return newBook;
+    }
+
+    static getLibrary() {
+        return Library.#library;
+    }
 }
 
 // Initial books for display/testing purposes
-const book1 = addBookToLibrary("Book 1", "Mary Sue", 100, true);
-const book2 = addBookToLibrary("Book 2", "John Doe", 111, false);
-const book3 = addBookToLibrary("Book 3", "Anth ony",   1, true);
+const book1 = Library.createAndAddBookToLibrary("Book 1", "Mary Sue", 100, true);
+const book2 = Library.createAndAddBookToLibrary("Book 2", "John Doe", 111, false);
+const book3 = Library.createAndAddBookToLibrary("Book 3", "Anth ony",   1, true);
 
 // DOM manipulation
 const libraryEle = document.querySelector(".library");
-for (let book of library) { // Array uses for/of
+for (let book of Library.getLibrary()) { // Array uses for/of (This is part of initial, I need the library element however)
     addBookToLibraryElement(book);
 }
 
@@ -75,16 +111,16 @@ libraryEle.addEventListener("click", (e) => {
         let index;
         
         let book;
-        for (let i = 0; i < library.length; i++) {
-            if (library[i].id === id) {
-                book = library[i];
+        for (let i = 0; i < Library.library.length; i++) {
+            if (Library.library[i].id === id) {
+                book = Library.library[i];
                 index = i;
                 break;
             }
         }
         
         if (e.target.classList.contains("delete-button")) {
-            library.splice(index, 1);
+            Library.library.splice(index, 1);
             libraryEle.removeChild(bookEle);
         } else { // read-button
             book.updateReadStatus();
@@ -125,7 +161,7 @@ addBookButton.addEventListener("click", (e) => {
 
     if (author != "" && title != "" && pageNum > 0) { // If all required fields are filled
         e.preventDefault();
-        const newBook = addBookToLibrary(title, author, pageNum, hasBeenRead);
+        const newBook = Library.createAndAddBookToLibrary(title, author, pageNum, hasBeenRead);
         addBookToLibraryElement(newBook);
         // Clear info for next book
         clearDialogForm();

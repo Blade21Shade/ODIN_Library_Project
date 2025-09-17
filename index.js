@@ -111,16 +111,17 @@ libraryEle.addEventListener("click", (e) => {
         let index;
         
         let book;
-        for (let i = 0; i < Library.library.length; i++) {
-            if (Library.library[i].id === id) {
-                book = Library.library[i];
+        let lib = Library.getLibrary();
+        for (let i = 0; i < lib.length; i++) {
+            if (lib[i].id === id) {
+                book = lib[i];
                 index = i;
                 break;
             }
         }
         
         if (e.target.classList.contains("delete-button")) {
-            Library.library.splice(index, 1);
+            lib.splice(index, 1);
             libraryEle.removeChild(bookEle);
         } else { // read-button
             book.updateReadStatus();

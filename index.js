@@ -2,37 +2,37 @@
 // const library = [];
 
 class Book {
-    #title;
-    #author;
-    #pageNum;
-    #hasBeenRead;
-    #id;
+    title;
+    author;
+    pageNum;
+    hasBeenRead;
+    id;
     constructor(title, author, pageNum, hasBeenRead) {
-        this.#title = title;
-        this.#author = author;
-        this.#pageNum = pageNum;
-        this.#hasBeenRead = hasBeenRead ? "Has been read" : "Hasn't been read";
-        this.#id = crypto.randomUUID();
+        this.title = title;
+        this.author = author;
+        this.pageNum = pageNum;
+        this.hasBeenRead = hasBeenRead ? "Has been read" : "Hasn't been read";
+        this.id = crypto.randomUUID();
     }
 
     get title() {
-        return this.#title;
+        return this.title;
     }
 
     get author() {
-        return this.#author;
+        return this.author;
     }
 
     get pageNum() {
-        return this.#pageNum;
+        return this.pageNum;
     }
 
     get hasBeenRead() {
-        return this.#hasBeenRead;
+        return this.hasBeenRead;
     }
 
     get id() {
-        return this.#id;
+        return this.id;
     }
 
     updateReadStatus() {
@@ -66,7 +66,7 @@ class Library {
 // Initial books for display/testing purposes
 const book1 = Library.createAndAddBookToLibrary("Book 1", "Mary Sue", 100, true);
 const book2 = Library.createAndAddBookToLibrary("Book 2", "John Doe", 111, false);
-const book3 = Library.createAndAddBookToLibrary("Book 3", "Anth ony",   1, true);
+const book3 = Library.createAndAddBookToLibrary("Book 3", "Tony ony",   1, true);
 
 // DOM manipulation
 const libraryEle = document.querySelector(".library");
